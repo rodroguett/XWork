@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+          <head>
+                    <title>Error de XWork | DataBase:[:TITLE_NAME:]</title>
+                    <meta charset="UTF-8">
+                    <link href="[:__BASE_URL:]layout/xworks/fonts/Raleway/Light/stylesheet.css" rel="stylesheet" type="text/css"/>
+                    <meta name="viewport" content="width=device-width">
+                     [:__STYLE_SHEETS:]
+                    <style>
+                              body{background: #475A66;color:#FFFFFF;font-family: "Raleway-Light", sans-serif;}
+                              .main-error{width: auto;margin: 30px;box-shadow: 1px 1px 17px black;}
+                              .main-error .title{background-color: rgb(230, 93, 93);padding: 3px 15px;border-radius: 4px 4px 0 0;}
+                              .main-error .description{min-height: 100px;background-color: rgb(224, 224, 224);color: black;padding: 10px;position: relative;}
+                              .main-error .description p{margin: 4px 0;}
+                              .powered{text-align: right;font-size: 11px;margin-right: 20px;}
+                              .powered a{color: rgb(255, 136, 136);text-decoration: none;text-shadow: 1px 1px 1px black;}
+                              .trace {font-weight: bold;font-style: italic;padding: 10px 28px;box-shadow: 0px 0px 10px #000;margin-top: 14px;}
+                    </style>
+          </head>
+          <body>
+                    <div class="main-error">
+                              <div class="title"> Error de Base de Datos: [:TITLE_NAME:]</div>
+                              <div class="description">
+                                        <p>Descripcion: [:CONTENT:]</p>
+                                        [:ADVANCED:]
+                              </div>
+                    </div>
+                    <div class="powered">[:__POWEREDBY:]</div>
+                    [:__PLUGIN_JS:] 
+                    [:__SCRIPTS_JS:]
+                    [:__BENCHMARK:]
+          </body>
+</html>
