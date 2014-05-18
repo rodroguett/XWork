@@ -25,9 +25,7 @@ if (!defined('XWORK')) {
  * @abstract       Sistema de Excepxion para el sistema de arranque del Framework
  *
  */
-
-
-class BootstrapException extends XWorkException{
+class BootstrapException extends XWorkException {
 
           public function __construct($message, $code = 0, $previous = null) {
                     parent::__construct($message, $code, $previous);
@@ -40,4 +38,5 @@ class BootstrapException extends XWorkException{
           public function getExplicitMSG() {
                     return 'Bootstrap Error : ' . $this->getMessage();
           }
+
 }

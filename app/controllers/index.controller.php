@@ -14,9 +14,9 @@
 
 namespace XWork\Controllers;
 
-use \XWork\Controller as Controller;
+use \XWork\Controller as Ctrl;
 
-class indexController extends Controller {
+class indexController extends Ctrl {
           
           public function __construct() {
                     parent::__construct();
@@ -24,10 +24,15 @@ class indexController extends Controller {
           
           public function index() {
                     $h = $this->loadHelper('fecha');
-                    $this->_view->load();
-                    $this->_view->assign('TEST','Prueba terminada');
-                    $this->_view->assign('CANCINO','Daniel');
-                    $this->_view->setScript(array('example'));
+                    $this->_view->load();                    
+                    $this->_view->assign('__MENU_APP', $this->getMenu());
+                    $this->_view->assign('CANTIDAD_NOTIFICACIONES_TOTALES','');
+                    $this->_view->assign('CANTIDAD_MENSAJES_USUARIO','');
+                    $this->_view->assign('CANTIDAD_NOTIFICACIONES_USUARIO','');
+                    $this->_view->assign('CANTIDAD_TAREAS_USUARIO','2');
+//                    $this->_view->assign('TEST','Prueba terminada');
+//                    $this->_view->assign('CANCINO','Daniel');
+//                    $this->_view->setScript(array('example'));
                     $this->_view->renderizar();
                     
           }
@@ -35,7 +40,7 @@ class indexController extends Controller {
           public function model(){
                     $m = $this->loadModel('item');
                     $t = "";
-                    $b = $m->getAllCities();
+                    $b = array();//$m->getAllCities();
                     $this->_view->load('model');
                     for($i=0;$i<count($b);$i++){
                               $ares = $b[$i];

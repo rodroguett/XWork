@@ -1,0 +1,450 @@
+<!-- Bread crumb is created dynamically -->
+<!-- row -->
+<div class="row">
+
+          <!-- col -->
+          <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                    <h1 class="page-title txt-color-blueDark"><!-- PAGE HEADER --><i class="fa-fw fa fa-file-o"></i> Usuario <span>&Gt;
+                                        Mi Perfil </span></h1>
+          </div>
+
+</div>
+<!-- end row -->
+
+<!-- row -->
+
+<div class="row">
+
+          <div class="col-sm-10 col-xs-push-1">
+
+
+                    <div class="well well-sm">
+
+                              <div class="row">
+
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                  <div class="well well-light well-sm no-margin no-padding">
+
+                                                            <div class="row">
+
+                                                                      <div class="col-sm-12">
+                                                                      </div>
+
+                                                                      <div class="col-sm-12">
+
+                                                                                <div class="row">
+
+                                                                                          <div class="col-sm-3 profile-pic">
+                                                                                                    <img src="[:__TPL_IMG:]avatars/sunny-big.png" style="top: 15px">
+
+                                                                                          </div>
+                                                                                          <div class="col-sm-6">
+                                                                                                    <h1>[:USER_NAME:] <span class="semi-bold">[:USER_LNAME:]</span>
+                                                                                                              <br>
+                                                                                                              <small> [:USER_CARGO:]</small></h1>
+
+                                                                                                    <ul class="list-unstyled">
+                                                                                                              <li>
+                                                                                                                        <p class="text-muted">
+                                                                                                                                  <i class="fa fa-phone"></i>&nbsp;&nbsp;[:USER_PHONE:]
+                                                                                                                        </p>
+                                                                                                              </li>
+                                                                                                              <li>
+                                                                                                                        <p class="text-muted">
+                                                                                                                                  <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:[:USER_EMAIL:]">[:USER_EMAIL:]</a>
+                                                                                                                        </p>
+                                                                                                              </li>
+
+                                                                                                              <li>
+                                                                                                                        <p class="text-muted">
+                                                                                                                                  <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">[:USER_SKYPE:]</span>
+                                                                                                                        </p>
+                                                                                                              </li>
+
+                                                                                                              <li>
+                                                                                                                        <p class="text-muted">
+                                                                                                                                  <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Usuario desde: [:USER_FROM:]</span>
+                                                                                                                        </p>
+                                                                                                              </li>
+                                                                                                    </ul>
+                                                                                                    <br>
+                                                                                                    <a href="#alterDatos" data-toggle="modal" id="AlterUserInfo" class="btn btn-default btn-xs"><i class="fa fa-cogs"></i>&nbsp;Cambiar Mis Datos</a>
+                                                                                                    <br>
+                                                                                                    <br>
+
+                                                                                          </div>
+                                                                                          <div class="col-sm-3">
+
+
+                                                                                          </div>
+
+                                                                                </div>
+
+                                                                      </div>
+
+                                                            </div>
+
+
+                                                  </div>
+
+                                        </div>
+
+                              </div>
+
+                    </div>
+
+
+          </div>
+
+</div>
+
+<!-- end row -->
+
+</section>
+<!-- end widget grid -->
+<div class="modal fade" id="alterDatos" tabindex="-1" role="dialog" aria-labelledby="myProfileLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+                    <div class="modal-content">
+                              <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                  ×
+                                        </button>
+                                        <h4 class="modal-title">
+                                                  Mi Perfil
+                                        </h4>
+                              </div>
+                              <div class="modal-body no-padding">
+
+
+                                        <div id="tabs">
+                                                  <ul>
+                                                            <li>
+                                                                      <a href="#standard-information">Datos Personales</a>
+                                                            </li>
+                                                            <li>
+                                                                      <a href="#password-section">Contraseña</a>
+                                                            </li>
+                                                  </ul>
+                                                  <div id="standard-information">
+
+                                                            <form action="" id="alter-user-information" class="smart-form" >
+
+                                                                      <fieldset>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">Nombre</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-user"></i>
+                                                                                                                        <input type="text" name="fname" value="[:USER_NAME:]">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">Apellido</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-user"></i>
+                                                                                                                        <input type="text" name="lname" value="[:USER_LNAME:]">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">E-Mail</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+                                                                                                                        <input type="email" name="email" value="[:USER_EMAIL:]" [:USER_MAIL_EXC:]>
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">Telefono</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-phone"></i>
+                                                                                                                        <input type="tel" name="phone" value="[:USER_PHONE:]">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">Skype</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-skype"></i>
+                                                                                                                        <input type="text" name="skype" value="[:USER_SKYPE:]">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-2">Cargo</label>
+                                                                                                    <div class="col col-10">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-cog"></i>
+                                                                                                                        <input type="text" name="cargo" value="[:USER_CARGO:]">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+
+                                                                                          <div class="row">
+                                                                                                    <section class="col col-12 " id="handlerAjax1" style="width: 100%;">
+                                                                                                              <div class="alert alert-danger fade in typeErrorHandler" style="display: none; float: initial; margin-bottom: 0;">
+                                                                                                                        <button class="close" data-dismiss="alert">
+                                                                                                                                  ×
+                                                                                                                        </button>
+                                                                                                                        <i class="fa-fw fa fa-times"></i>
+                                                                                                                        <strong>Error!</strong> No hemos podido editar  tu usuario
+                                                                                                              </div>
+                                                                                                              <div class="alert alert-success fade in typeSuccessHandler"  style="display: none;float: initial; margin-bottom: 0;">
+                                                                                                                        <button class="close" data-dismiss="alert">
+                                                                                                                                  ×
+                                                                                                                        </button>
+                                                                                                                        <i class="fa-fw fa fa-check"></i>
+                                                                                                                        <strong>Completado!</strong> Se ha editado correctamente tu usuario.
+                                                                                                              </div>
+                                                                                                    </section>
+                                                                                          </div>
+                                                                                </section>
+                                                                      </fieldset>
+
+                                                                      <footer>
+                                                                                <button type="submit" class="btn btn-primary">
+                                                                                          Aceptar
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                          Cancelar
+                                                                                </button>
+
+                                                                      </footer>
+                                                            </form>	
+                                                  </div>
+                                                  <div id="password-section">
+
+
+                                                            <form action="" id="alter-user-pass" class="smart-form">
+
+                                                                      <fieldset>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-4">Contraseña</label>
+                                                                                                    <div class="col col-8">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                                                                                                        <input type="password" name="password" id="password">
+                                                                                                              </label>
+                                                                                                              <div class="note">
+                                                                                                                        Si no desea cambiar su contraseña, deje vacios estos campos
+                                                                                                              </div>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                          <div class="row">
+                                                                                                    <label class="label col col-4">Repetir Contraseña</label>
+                                                                                                    <div class="col col-8">
+                                                                                                              <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                                                                                                        <input type="password" name="rpassword">
+                                                                                                              </label>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </section>
+                                                                                <section>
+
+                                                                                          <div class="row">
+                                                                                                    <section class="col col-12 " id="handlerAjax2" style="width: 100%;">
+                                                                                                              <div class="alert alert-danger fade in typeErrorHandler" style="display: none; float: initial; margin-bottom: 0;">
+                                                                                                                        <button class="close" data-dismiss="alert">
+                                                                                                                                  ×
+                                                                                                                        </button>
+                                                                                                                        <i class="fa-fw fa fa-times"></i>
+                                                                                                                        <strong>Error!</strong> No hemos podido editar tu contraseña
+                                                                                                              </div>
+                                                                                                              <div class="alert alert-success fade in typeSuccessHandler"  style="display: none;float: initial; margin-bottom: 0;">
+                                                                                                                        <button class="close" data-dismiss="alert">
+                                                                                                                                  ×
+                                                                                                                        </button>
+                                                                                                                        <i class="fa-fw fa fa-check"></i>
+                                                                                                                        <strong>Completado!</strong> Se ha editado correctamente tu contraseña
+                                                                                                              </div>
+                                                                                                    </section>
+                                                                                          </div>
+                                                                                </section>
+                                                                      </fieldset>
+
+                                                                      <footer>
+                                                                                <button type="submit" class="btn btn-primary">
+                                                                                          Aceptar
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                          Cancelar
+                                                                                </button>
+
+                                                                      </footer>
+                                                            </form>	
+                                                  </div>
+
+
+                                        </div>
+
+                              </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+          </div>
+</div>
+
+<script type="text/javascript">
+          
+          pageSetUp();
+          $('#tabs').tabs();
+          $("#alter-user-pass").validate({
+                    rules: {
+                              password: {
+                                        required: true
+                              },
+                              rpassword: {
+                                        required: true,
+                                        equalTo: '#password'
+                              }
+                    },
+                    messages: {
+                              password: {
+                                        required: 'Por favor ingrese su contraseña'
+                              },
+                              rpassword: {
+                                        required: 'Por favor ingrese su contraseña',
+                                        equalTo: 'Sus contraseñas no coinciden'
+                              }
+
+                    },
+                    // Do not change code below
+                    errorPlacement: function(error, element) {
+                              error.insertAfter(element.parent());
+                    },
+                    submitHandler: function(form) {
+                              var dataForm = $(form).serialize();
+                              $.blackout.show("Guardando...");
+                              $.ajax({
+                                        type: "POST",
+                                        url: "[:__BASE_URL:]administrador/edit_my_pass/",
+                                        data: dataForm
+                              }).done(function(data) {
+                                        setTimeout(function() {
+                                                  if (data > 0) {
+                                                            $("#handlerAjax2 .typeSuccessHandler").fadeIn();
+                                                            $.blackout.hide(function() {
+                                                                      $("#alterDatos [data-dismiss=modal]").click();
+                                                                      container = $('#content');
+                                                                      setTimeout(function() {
+                                                                                loadURL("[:__BASE_URL:]user/profile", container);
+                                                                      },401);
+                                                            });
+                                                  } else {
+                                                            $("#handlerAjax2 .typeErrorHandler").fadeIn();
+                                                            $.blackout.hide();
+                                                  }
+                                        }, 1000);
+                              });
+                    }
+          });
+
+          $('#alter-user-information').validate({
+                    // Rules for form validation
+                    rules: {
+                              fname: {
+                                        required: true
+                              },
+                              lname: {
+                                        required: true
+                              },
+                              email: {
+                                        required: true,
+                                        email: true
+                              },
+                              phone: {
+                                        required: true
+                              },
+                              skype: {
+                              },
+                              cargo: {
+                                        required: true
+                              }
+                    },
+                    // Messages for form validation
+                    messages: {
+                              fname: {
+                                        required: 'Por favor ingrese su nombre '
+                              },
+                              lname: {
+                                        required: 'Por favor ingrese su apellido'
+                              },
+                              email: {
+                                        required: 'Por favor ingrese su correo',
+                                        email: 'Por favor ingrese un correo valido'
+                              },
+                              phone: {
+                                        required: 'Por favor ingrese un numero de telefono'
+                              },
+                              skype: {
+                              },
+                              cargo: {
+                                        required: 'Por favor ingrese un cargo'
+                              }
+                    },
+                    // Do not change code below
+                    errorPlacement: function(error, element) {
+                              error.insertAfter(element.parent());
+                    },
+                    submitHandler: function(form) {
+                              var dataForm = $(form).serialize();
+                              $.blackout.show("Guardando...");
+                              $.ajax({
+                                        type: "POST",
+                                        url: "[:__BASE_URL:]administrador/edit_my_user/",
+                                        data: dataForm
+//                    xhr: function() {
+//                              var xhr = new window.XMLHttpRequest();
+//                              xhr.upload.addEventListener("progress", function(evt) {
+//                                        if (evt.lengthComputable) {
+//                                                  // Calculando el porcentaje de todo el proceso 
+//                                                  var percentComplete = evt.loaded / evt.total;
+//                                                  progress(percentComplete * PERCENT_UPLOAD * 0.01);
+//
+//                                        }
+//                              }, false);
+//                              return xhr;
+//                    }
+                              }).done(function(data) {
+                                        setTimeout(function() {
+                                                  if (data > 0) {
+                                                            $("#handlerAjax1 .typeSuccessHandler").fadeIn();
+                                                            $.blackout.hide(function() {
+                                                                      $("#alterDatos [data-dismiss=modal]").click();
+                                                                      container = $('#content');
+                                                                      setTimeout(function() {
+                                                                                loadURL("[:__BASE_URL:]user/profile", container);
+                                                                      },401);
+                                                            });
+                                                  } else {
+                                                            $("#handlerAjax1 .typeErrorHandler").fadeIn();
+                                                            $.blackout.hide();
+                                                  }
+                                        }, 1000);
+                              });
+                    }
+          });
+          
+          [:SCRIPT_ALTER:]
+          
+          function launchModalEdit(){
+                    $("#AlterUserInfo").trigger('click');
+          }
+          // PAGE RELATED SCRIPTS
+
+</script>
+
+
+          

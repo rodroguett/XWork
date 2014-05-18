@@ -29,4 +29,5 @@ interface database {
           public function _lastID();
           public function _multipleID($_size);
           public function _freeResult();
+          public function  _sanitize($var);
 }

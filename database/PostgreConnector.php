@@ -236,4 +236,14 @@ final class PostgreConnector extends DatabaseConfig implements database {
                     pg_close($this->_sqlLink);
           }
 
+          /**
+           * Limpia Inyecciones SQL
+           * 
+           * @param none
+           * @return none
+           */
+          public function _sanitize($var) {
+                    return htmlentities($var);
+          }
+
 }

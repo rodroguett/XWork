@@ -45,8 +45,8 @@ final class index {
                     self::getExceptions();
                     self::getDBConnectors();
                     try {
-                              Bootstrap::run(new Request);
                               Session::init();
+                              Bootstrap::run(new Request);
                     } catch (BootstrapException $exc) {
                               Errors::launch($exc);
                     } catch (Exception $exc) {
@@ -78,6 +78,8 @@ final class index {
                               self::verify(XWORK, 'Misc.php');
                               self::verify(XWORK, 'Translator.php');
                               self::verify(XWORK, 'Log.php');
+                              self::verify(XWORK, 'Menu.php');
+                              self::verify(XWORK, 'Hash.php');
                     } catch (PHPException $exc) {
                               self::exception_error_printer($exc);
                     }
@@ -112,6 +114,8 @@ final class index {
                               self::verify(EXCEPTIONS, 'ViewException.php');
                               self::verify(EXCEPTIONS, 'ModelException.php');
                               self::verify(EXCEPTIONS, 'DatabaseException.php');
+                              self::verify(EXCEPTIONS, 'SessionException.php');
+                              self::verify(EXCEPTIONS, 'LibsException.php');
                     } catch (PHPException $exc) {
                               Errors::launch($exc);
                     }
@@ -123,6 +127,7 @@ final class index {
                               self::verify(CONFIGS, 'database.php');
                               self::verify(CONFIGS, 'constant.php');
                               self::verify(CONFIGS, 'misc.php');
+                              self::verify(CONFIGS, 'mail.php');
                     } catch (PHPException $exc) {
                               Errors::launch($exc);
                     }
@@ -162,7 +167,7 @@ final class index {
           }
 
           public static function version() {
-                    return '0.4.1';
+                    return '0.4.2';
           }
           
           public function __clone() {

@@ -1,7 +1,7 @@
 <?php
 namespace XWork\Helpers;
 
-use XWork\Helper as Helper;
+use XWork\Helper as Hlp;
 
 /**
  * Helper de funciones de fechas
@@ -12,7 +12,7 @@ use XWork\Helper as Helper;
  * @version    0.7
  */
 
-class fechaHelper extends Helper {
+class fechaHelper extends Hlp {
           
           public function __construct() {
                     parent::__construct();

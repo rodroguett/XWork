@@ -1,1 +1,19 @@
-Hola Mundo desde la Vista [:TEST:]  [:CANCINO:] [:__BENCHMARK:]
+                       [:__MENU_APP:]		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+
+			</div>
+			<!-- END MAIN CONTENT -->
+
+		</div>
+		<!-- END MAIN PANEL -->
+
+                  <!--  [:TEST:]  [:CANCINO:] [:__BENCHMARK:] 

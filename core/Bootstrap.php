@@ -54,25 +54,30 @@ class Bootstrap {
                                         Errors::launch($e);
                               }
                     } else {
-                              $var_x = Session::get(DEFAULT_USER_PERMISOS);
-                              if ($controlador == DEFAULT_CONTROLLER OR $controlador == DEFAULT_LOGIN OR $controlador == DEFAULT_ERROR) {
-                                        $rutaControlador = CONTROLLERS . $controlador . '.controller.php';
-                                        $controllerName  = '\XWork\Controllers\\' . $controlador . 'Controller';
-                              } elseif (!empty($var_x)) {
-                                        if (in_array(strtolower($controlador), Session::get(DEFAULT_USER_PERMISOS)) 
-                                                OR in_array(strtolower($metodo), Session::get(DEFAULT_USER_PERMISOS)) 
-                                                OR strtolower(substr($controlador, 0, 3)) == DEFAULT_AJAX_PREFIX 
-                                                OR is_array($controlador) OR $controlador == DEFAULT_ERROR 
-                                                OR $metodo == 'index') {
-
+                              if(PERMISSION_TYPE == 0){
+                                        $var_x = Session::get(DEFAULT_USER_PERMISOS);
+                                        if ($controlador == DEFAULT_CONTROLLER OR $controlador == DEFAULT_VERIFY  OR $controlador == DEFAULT_LOGIN OR $controlador == DEFAULT_ERROR OR $controlador == DEFAULT_MENU OR $controlador == DEFAULT_PROFILE_USER) {
                                                   $rutaControlador = CONTROLLERS . $controlador . '.controller.php';
                                                   $controllerName  = '\XWork\Controllers\\' . $controlador . 'Controller';
+                                        } elseif (!empty($var_x)) {
+                                                  if (in_array(strtolower($controlador), Session::get(DEFAULT_USER_PERMISOS)) 
+                                                          OR in_array(strtolower($metodo), Session::get(DEFAULT_USER_PERMISOS)) 
+                                                          OR strtolower(substr($controlador, 0, 3)) == DEFAULT_AJAX_PREFIX 
+                                                          OR is_array($controlador) OR $controlador == DEFAULT_ERROR 
+                                                          OR $metodo == 'index') {
+
+                                                            $rutaControlador = CONTROLLERS . $controlador . '.controller.php';
+                                                            $controllerName  = '\XWork\Controllers\\' . $controlador . 'Controller';
+                                                  } else {
+                                                            header('location:' . BASE_URL . DEFAULT_ERROR . '/404');
+                                                  }
                                         } else {
-                                                  header('location:' . BASE_URL . DEFAULT_ERROR . '/codes404');
+                                                  //die(" No Puede estar aqui, por error de permiso, este mensaje desaparecera cuando edites la linea 46 de Bootstrap del Nucleo " . DEFAULT_VERIFY . $controlador );
+                                                  header('location:' . BASE_URL . DEFAULT_LOGIN . '/'. DEFAULT_LOGOUT);
                                         }
                               } else {
-                                        //die(" No Puede estar aqui, por error de permiso, este mensaje desaparecera cuando edites la linea 46 de Bootstrap del Nucleo");
-                                        header('location:' . BASE_URL . DEFAULT_LOGIN . '/'. DEFAULT_LOGOUT);
+                                        $rutaControlador = CONTROLLERS . $controlador . '.controller.php';
+                                        $controllerName  = '\XWork\Controllers\\' . $controlador . 'Controller';
                               }
                     }
 

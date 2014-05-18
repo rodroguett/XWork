@@ -72,8 +72,17 @@ class Request {
                     return $this->_metodo;
           }
 
-          public function getArgs() {
-                    return $this->_argumentos;
+          public function getArgs($index = false) {
+                    if(is_int($index)){
+                              if(isset($this->_argumentos[$index])){
+                                        return $this->_argumentos[$index];
+                              } else {
+                                        return false;
+                              }
+                    } else {
+                              return $this->_argumentos;
+                    }
+                              
           }
 
 }

@@ -31,7 +31,7 @@ class Model implements modelInterface{
           }
 
           function __destruct() {
-                    
+                    $this->_database->__destruct();
           }
 
 }

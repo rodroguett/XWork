@@ -14,16 +14,16 @@
 
 namespace XWork\Controllers;
 
-use \XWork\Controller as Controller;
-use \XWork\Errors as Errors;
-use \XWork\Excepciones\ServerException as ServerException;
-use \XWork\Excepciones\ModelException as ModelException;
-use \XWork\Excepciones\ViewException as ViewException;
-use \XWork\Excepciones\ControllerException as ControllerException;
-use \XWork\Excepciones\BootstrapException as BootstrapException;
-use \XWork\Excepciones\XWorkException as XWorkException;
+use \XWork\Controller as ctrl;
+use XWork\Errors as err;
+use \XWork\Excepciones\ServerException as SrvException;
+use \XWork\Excepciones\ModelException as MdlException;
+use \XWork\Excepciones\ViewException as VwException;
+use \XWork\Excepciones\ControllerException as CtrlException;
+use \XWork\Excepciones\BootstrapException as BootException;
+use \XWork\Excepciones\XWorkException as XWException;
 
-class errorController extends Controller {
+class errorController extends ctrl {
 
           public function __construct() {
                     parent::__construct();
@@ -32,24 +32,24 @@ class errorController extends Controller {
           public function index() {
                     try {
                               switch ($this->_request->getMetodo()) {
-                                        case '404': throw new ServerException('Pagina No Encontrada',404);
-                                        case '500': throw new ServerException('Internal Server Error',500);
-                                        default: throw new XWorkException('Error Desconocido',-1);
+                                        case '404': throw new SrvException('Pagina No Encontrada',404);
+                                        case '500': throw new SrvException('Internal Server Error',500);
+                                        default: throw new XWException('Error Desconocido',-1);
                               }
-                    } catch (XWorkException $exc) {
-                              Errors::launch($exc);
-                    } catch (BootstrapException $exc){
-                              Errors::launch($exc);
-                    } catch (ControllerException $exc){
-                              Errors::launch($exc);
-                    } catch (ServerException $exc){
-                              Errors::launch($exc);
-                    } catch (ModelException $exc){
-                              Errors::launch($exc);
-                    } catch (ViewException $exc){
-                              Errors::launch($exc);
+                    } catch (XWException $exc) {
+                              err::launch($exc);
+                    } catch (BootException $exc){
+                              err::launch($exc);
+                    } catch (CtrlException $exc){
+                              err::launch($exc);
+                    } catch (SrvException $exc){
+                              err::launch($exc);
+                    } catch (MdlException $exc){
+                              err::launch($exc);
+                    } catch (VwException $exc){
+                              err::launch($exc);
                     } catch (\Exception $exc){
-                              Errors::launch($exc);
+                              err::launch($exc);
                     }
           }
 

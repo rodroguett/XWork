@@ -234,4 +234,15 @@ final class MySQLConnector extends DatabaseConfig implements database {
                     mysql_close($this->_sqlLink);
           }
 
+          /**
+           *Limpia Inyecciones SQL
+           * 
+           * @param none
+           * @return none
+           */
+
+          public function _sanitize($var) {
+                    return htmlentities($var);
+          }
+
 }

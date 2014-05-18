@@ -6,6 +6,7 @@ if (!defined('XWORK')) {
           exit('ERROR: No se puede lanzar Directamente');
 }
 
+use XWork\Excepciones\SessionException as SessionException;
 /**
  * Sistema de Gestion de Sesiones PHP
  * 
@@ -21,6 +22,7 @@ class Session {
 
           public static function init() {
                     session_start();
+                    self::set('tiempo', time());
           }
 
           public static function destroy($clave = false) {
@@ -47,18 +49,18 @@ class Session {
           public static function get($target) {
                     if (isset($_SESSION[$target])) {
                               return $_SESSION[$target];
+                    } else {
+                              return false;
                     }
           }
 
           public static function set($target, $value) {
-                    if (isset($_SESSION[$target])) {
-                              return $_SESSION[$target] = $value;
-                    }
+                    return $_SESSION[$target] = $value;
           }
 
           public static function tiempo() {
                     if (!session::get('tiempo') || !defined('SESSION_TIME')) {
-                              throw new Exception('No se ha definido el tiempo de sesion');
+                              throw new SessionException('No se ha definido el tiempo de sesion');
                     }
 
                     if (SESSION_TIME == 0) {
@@ -67,7 +69,7 @@ class Session {
 
                     if (time() - session::get('tiempo') > (SESSION_TIME * 60)) {
                               log::session('LOGOUT', 'Sesion cerrada por tiempo inactiva');
-                              //session::destroy();
+                              session::destroy();
                               header('location:' . BASE_URL . 'login/logout');
                     } else {
                               session::set('tiempo', time());

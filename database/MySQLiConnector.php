@@ -1,5 +1,7 @@
 <?php
+
 namespace XWork\Database;
+
 if (!defined('XWORK'))
           exit('ERROR: No se puede lanzar Directamente');
 
@@ -7,6 +9,7 @@ use \mysqli as mysqli;
 use \XWork\Excepciones\DatabaseException as DatabaseException;
 use \XWork\Errors as Errors;
 use \Exception as Exception;
+
 /**
   @package Database
  * 
@@ -18,7 +21,6 @@ use \Exception as Exception;
  * @version    1.3
  * 
  */
-
 final class MySQLiConnector extends DatabaseConfig implements database {
 
           /**
@@ -31,7 +33,7 @@ final class MySQLiConnector extends DatabaseConfig implements database {
           private $_sqlAffectedRows = array();
           private $_sqlRows         = array();
           private $_lastID;
-          private $_autocommit = true;
+          private $_autocommit      = true;
 
           /**
            * Create la unica instancia de la clase
@@ -43,9 +45,9 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @param Sring $port Puerto de Conexion
            * @return Object self::$_singleInstance Instance
            */
-          public static function _getInstance($host,$user,$pass,$name,$port) {
+          public static function _getInstance($host, $user, $pass, $name, $port) {
                     if (!self::$_singleInstance instanceof self) {
-                              self::$_singleInstance = new self($host,$user,$pass,$name,$port);
+                              self::$_singleInstance = new self($host, $user, $pass, $name, $port);
                     }
                     return self::$_singleInstance;
           }
@@ -60,8 +62,8 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @param Sring $port Puerto de Conexion
            * @return none
            */
-          private function __construct($host,$user,$pass,$name,$port) {
-                    $this->_initializeConfiguration($host,$user,$pass,$name,$port);
+          private function __construct($host, $user, $pass, $name, $port) {
+                    $this->_initializeConfiguration($host, $user, $pass, $name, $port);
                     $this->_connect();
           }
 
@@ -72,7 +74,11 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return Object $this
            */
           public function _connect() {
-                    $this->_sqlLink = new mysqli($this->_sqlHost, $this->_sqlUser, $this->_sqlPass, $this->_sqlDB);
+                    try{
+                              $this->_sqlLink = new mysqli($this->_sqlHost, $this->_sqlUser, $this->_sqlPass, $this->_sqlDB);
+                    }  catch (\Exception $e){
+                              XWork\Errors::launch($e);
+                    }
                     return $this;
           }
 
@@ -84,8 +90,8 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            */
           public function _selectDB($db_name = false) {
                     try {
-                              if(!$db_name){
-                                        throw new DatabaseException('Para Cambiar de Base de Datos, Tiene que pasar el Nombre de la Misma',-1);
+                              if (!$db_name) {
+                                        throw new DatabaseException('Para Cambiar de Base de Datos, Tiene que pasar el Nombre de la Misma', -1);
                               } else {
                                         $this->_sqlLink->select_db($db_name);
                                         return $this;
@@ -95,7 +101,6 @@ final class MySQLiConnector extends DatabaseConfig implements database {
                     } catch (Exception $exc) {
                               Errors::launch($exc);
                     }
-
           }
 
           /**
@@ -106,23 +111,23 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            */
           public function _query($_query) {
                     try {
-                              if($this->_sqlExec = $this->_sqlLink->query($_query)){
-                                        return $this;
+                              @$this->_nextResult();
+                              if ($this->_sqlExec = $this->_sqlLink->query($_query)) {
+                                        return $this->_sqlExec;
                               } else {
-                                        throw new DatabaseException('No se ha Podido ejecutar la query',-3);
+                                        throw new DatabaseException('No se ha Podido ejecutar la query: ' . $this->_sqlLink->error, -3);
                               }
-                    } catch (DatabaseException $e){
+                    } catch (DatabaseException $e) {
                               Errors::launch($e);
-                    } catch (Exception $e){
+                    } catch (Exception $e) {
                               Errors::launch($e);
                     }
           }
-          
+
           /**
            * Quita AutoCommit de las QUERYS
            * @param bool $bool Habilita o deshabilita Autocommit
            */
-          
           public function _autocommit($bool) {
                     $this->_autocommit = $bool;
                     $this->_sqlLink->autocommit($bool);
@@ -136,7 +141,7 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return Object $this Current object
            */
           public function _begin() {
-                    if(!$this->_autocommit){
+                    if (!$this->_autocommit) {
                               return $this;
                     }
           }
@@ -148,7 +153,7 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return Object $this Current object
            */
           public function _commit() {
-                    if(!$this->_autocommit){
+                    if (!$this->_autocommit) {
                               $this->_sqlLink->commit();
                               return $this;
                     }
@@ -161,7 +166,7 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return Object $this Current object
            */
           public function _rollback() {
-                    if(!$this->_autocommit){
+                    if (!$this->_autocommit) {
                               $this->_sqlLink->rollback();
                               return $this;
                     }
@@ -178,7 +183,8 @@ final class MySQLiConnector extends DatabaseConfig implements database {
                     while ($this->_sqlRows  = $this->_sqlExec->fetch_assoc()) {
                               $_sqlStoreValues[] = $this->_sqlRows;
                     }
-                    $this->_freeResult();
+                              $this->_sqlExec->free();
+                              $this->_sqlLink->next_result();
                     return $_sqlStoreValues;
           }
 
@@ -193,7 +199,8 @@ final class MySQLiConnector extends DatabaseConfig implements database {
                     while ($this->_sqlArray = $this->_sqlExec->fetch_array(MYSQL_BOTH)) {
                               $_sqlStoreValues[] = $this->_sqlArray;
                     }
-                    $this->_freeResult();
+                              $this->_sqlExec->free();
+                              $this->_sqlLink->next_result();
                     return $_sqlStoreValues;
           }
 
@@ -204,12 +211,47 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return Array $this->_sqlStoreValues
            */
           public function _fetchObject() {
-                    $_sqlStoreValues = array();
-                    while ($this->_sqlRows  = $this->_sqlExec->fetch_object()) {
-                              $_sqlStoreValues[] = $this->_sqlRows;
+                    try {
+                              $ii = 0;
+                              $_sqlStoreValues = array();
+                              while ($this->_sqlRows = $this->_sqlExec->fetch_object()) {
+                                        $_sqlStoreValues[] = $this->_sqlRows;
+                                        $ii++;
+                              }
+                              $this->_sqlExec->free();
+                              if($ii>1){
+                                        $this->_sqlLink->next_result();
+                              } else {
+                                        
+                              }
+                              return $_sqlStoreValues;
+                    } catch (DatabaseException $e) {
+                              Errors::launch($e);
+                    } catch (Exception $e) {
+                              Errors::launch($e);
                     }
-                    $this->_freeResult();
-                    return $_sqlStoreValues;
+          }
+          
+          /**
+           * Permite Continuar la Ejecucion
+           * 
+           * @param none
+           * @return none 
+           */
+          
+          public function _nextResult() {
+                    $this->_sqlLink->next_result();
+          }
+          
+          /**
+           * Permite Continuar la Ejecucion
+           * 
+           * @param none
+           * @return none 
+           */
+          
+          public function _moreResults() {
+                    $this->_sqlLink->more_results();
           }
 
           /**
@@ -252,7 +294,20 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return none
            */
           public function _freeResult() {
-                    $this->_sqlExec->close();
+//                    mysqli_free_result($this->_sqlExec);
+                    $this->_sqlExec->free_result();
+          }
+
+          /**
+           * Limpia inyecciones sql
+           * 
+           * @param none
+           * @return none
+           */
+          public function _sanitize($var) {
+                    $a = ($var);
+                    $r = $this->_sqlLink->real_escape_string($a);
+                    return $r;
           }
 
           /**
@@ -272,7 +327,25 @@ final class MySQLiConnector extends DatabaseConfig implements database {
            * @return none
            */
           public function __destruct() {
-                    $this->_sqlLink->close();
+                    try {
+                              @$this->_sqlLink->close();
+                    } catch (\XWork\Excepciones\DatabaseException $e) {
+                              print_r($e);
+                    } catch (\Exception $e) {
+                              print_r($e);
+                    }
+          }
+
+          public function _callRoutine($routine, array $data) {
+                    $it = "";
+                    foreach ($data as $key => $value) {
+                              $n = "SET @" . $key . " = '" . $value . "';";
+                              $this->_query($n);
+                              $it .= " @" . $key . ",";
+                    }
+                    $it = substr($it, 0, -1);
+                    $q  = "CALL " . $routine . "(" . $it . ");";
+                    return $this->_query($q);
           }
 
 }

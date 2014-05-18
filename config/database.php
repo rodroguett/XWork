@@ -15,7 +15,7 @@ if (!defined('XWORK'))
 /**
  *        Define el nombre del esquema de la Base de Datos
  */
-define('DB_NAME', 'bh');
+define('DB_NAME', 'db_export');
 
 /**
  *        Define el nombre del usuario de la Base de Datos
@@ -30,7 +30,7 @@ define('DB_PASS', 'root');
 /**
  *        Define el Host donde se encuentra la Base de Datos
  */
-define('DB_HOST', 'localhost');
+define('DB_HOST', '10.0.0.4');// '10.0.0.4');// 'localhost');//10.0.0.4');
 
 /**
  *        Define el Driver a Utilizar como Conector Estandard
@@ -53,4 +53,4 @@ define('DB_PORT', 3306);
 /**
  *        Define un prefijo para las tablas, en el caso de que existiera
  */
-define('DB_PRFX', '');
+define('DB_PRFX', 'base_');

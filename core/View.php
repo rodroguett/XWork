@@ -24,9 +24,12 @@ class View {
           private $_css     = array();
           private $_scripts = array();
           private $_handler;
+          private $_staticResources;
+          private $statusTitle = false;
 
-          public function __construct(Request $q, $handler = FALSE) {
+          public function __construct(Request $q, $handler = FALSE, $staticResources = FALSE) {
                     $this->_handler = $handler;
+                    $this->_staticResources = $staticResources;
                     $this->controlador = $q->getControlador();
           }
 
@@ -41,7 +44,11 @@ class View {
                                                   $controller = $this->controlador;
                                         }
                               }
-                              $ruta = VIEWS . $controller . DS . $template . '.xview';
+                              if(!$this->_staticResources){
+                                        $ruta = VIEWS . $controller . DS . $template . '.xview';
+                              } else {
+                                        $ruta = $template;
+                              }
 
                               if (is_readable($ruta)) {
                                         if ($sandwich) {
@@ -56,8 +63,11 @@ class View {
                               } else {
                                         throw new ViewException('Vista No Encontrada("' . $ruta . '"), Imposible renderizar la Aplicacion', 2);
                               }
+                              
                     } catch (ViewException $exc) {
-                              $this->handle_exception($exc);
+                              Errors::launch($exc);
+                    } catch (\Exception $exc) {
+                              Errors::launch($exc);
                     }
           }
           
@@ -87,15 +97,22 @@ class View {
                     if (is_array($var)) {
                               foreach ($var as $key => $value) {
                                         if (!is_array($value)) {
-                                                  $this->template = str_replace("[:" . $key . ":]", $value, $this->template);
+                                                  if($value!=""){
+                                                            $this->template = preg_replace('^\[IF\[:'. $key . ':\]THEN\[\?(.*)\?\]OR\[\?.*\?\]\|\]^', '${1}',$this->template);
+                                                            $this->template = str_replace("[:" . $key . ":]", $value, $this->template);
+                                                  }
                                         }
                               }
                     } else {
-                              $this->template = str_replace("[:" . $var . ":]", $content, $this->template);
+                              if($content!=""){
+                                        $this->template = preg_replace('^\[IF\[:'. $var . ':\]THEN\[\?(.*)\?\]OR\[\?(.*)\?\]ENDIF\]^', '${1}',$this->template);
+                                        $this->template = str_replace("[:" . $var . ":]", $content, $this->template);
+                              }
                     }
           }
 
           private function removeEmpty() {
+                    $this->template = preg_replace('^\[IF\[:.*:\]THEN\[\?.*\?\]OR\[\?(.*)\?\]ENDIF\]^', '${1}', $this->template);
                     $this->template = preg_replace('^\[:.*:\]^', "", $this->template);
           }
 
@@ -103,7 +120,7 @@ class View {
                     $this->loadScripts('_js','__PLUGIN_JS');
                     $this->loadScripts('_scripts', '__SCRIPTS_JS');
                     $this->loadScripts('_css', '__STYLE_SHEETS');
-                    $this->loadConstats();
+                    $this->loadConstants();
                     $this->removeEmpty();
                     if($bool) {
                               eval ("?>" . $this->template . "<?");
@@ -164,18 +181,45 @@ class View {
                               $this->handle_exception($exc);
                     }
           }
+          
+          public function assignTitle($title) {
+                    if(!$this->statusTitle){
+                              $this->assign('__MAIN_TITLE', APP_NAME_TITLE.' '.APP_NAME_TITLE_SEPARATOR.' '.$title);
+                              $this->statusTitle = TRUE;
+                    }
+          }
 
-          public function loadConstats() {
+          private function loadConstants() {
+                    $t = BASE_URL . 'layout' . '/' . DEFAULT_LAYOUT . '/';
+                    if(!$this->statusTitle){
+                              $this->assign('__MAIN_TITLE', APP_NAME_TITLE);
+                              $this->statusTitle = true;
+                    }
                     $this->assign('__BASE_URL',BASE_URL);
                     $this->assign('__POWEREDBY',  index::powerby());
                     $this->assign('__BENCHMARK',  index::benchmark(TRUE));
+                    $this->assign('__TPL_JS', $t.'js/');
+                    $this->assign('__TPL_CSS', $t.'css/');
+                    $this->assign('__TPL_IMG', $t.'img/');
+                    $this->assign('__TODAY', date('d-m-Y'));
+                    
           }
 
           private function switchHandler() {
                     switch ($this->_handler) {
                               case 'ErrorHandler': return 'error';
+                              case 'MenuHandler': return 'menu';
                               default: return 'index';
                     }
+          }
+          
+          public function loadJavascriptScript($dir) {
+                    $fdr = ROOT . 'scripts/' . $dir . '.js';
+                    $v = new View(new Request(), TRUE, TRUE);
+                    $v->loadAjax($fdr, DEFAULT_LAYOUT, "staticResources");
+                    $n = $v->renderizar(false);
+                    $src = "<script type=\"text/javascript\">" . $n . "</script>";
+                    return $src;
           }
 
 }

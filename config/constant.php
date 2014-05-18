@@ -43,6 +43,11 @@ define('MODULOS', ROOT . 'modules' . DS);
 define('HELPERS', ROOT . 'helpers' . DS);
 
 /**
+ * Permite definir el Lugar donde se encuentran llas librerias de la Aplicacion
+ */
+define('LIBS', ROOT . 'libs' . DS);
+
+/**
  * Permite definir el Lugar donde se encuentran el Layout de la Aplicacion
  */
 define('LAYOUTS', ROOT . 'layout' );
@@ -66,9 +71,21 @@ define('DEFAULT_LOGOUT', 'logout');
  */
 define('DEFAULT_ERROR', 'error');
 /**
+ * Permite definir cual es el controlador de errores, para los handlers
+ */
+define('DEFAULT_VERIFY', 'verify');
+/**
+ * Permite definir cual es el controlador de errores, para los handlers
+ */
+define('DEFAULT_PROFILE_USER', 'user');
+/**
+ * Permite definir cual es el controlador de menu
+ */
+define('DEFAULT_MENU', 'menu');
+/**
  * Permite definir cual es la variable de sesion donde se guardan los permisos del usuario, si es que aplica
  */
-define('DEFAULT_USER_PERMISOS', 'usr_permisos');
+define('DEFAULT_USER_PERMISOS', 'user_permisos');
 /**
  * Permite definir cual es el prefijo para controladores de Ajax
  */
@@ -76,7 +93,7 @@ define('DEFAULT_AJAX_PREFIX', 'app');
 /**
  * Permite definir cual es el layout Predeterminado
  */
-define('DEFAULT_LAYOUT', 'xworks');
+define('DEFAULT_LAYOUT', 'llae');
 /**
  * Permite definir cual es el handler de los modulos
  */
@@ -86,9 +103,29 @@ define('DEFAULT_MODULE_HANDLER', '__handler.php');
 /**
  * Define cual es la direccion donde se ejecutara el framework
  */
-define('BASE_URL', 'http://codestore.cod/X-Frame2/');
+define('BASE_URL', 'http://dev.prize.cod/');
+/**
+ * Define cual es la direccion donde se encuentra el proyecto; si el framework esta
+ * en el 'root' entonces se deja igual que BASE_URL
+ */
+define('BASE_URL_PROYECT', 'http://dev.prize.cod/login/');
 /*
  * Define El tiempo predeterminado de Session en minutos
  */
-define('SESSION_TIME',5);
+define('SESSION_TIME',20);
+/*
+ * Define El tipo de permisos para el sistema
+ *        Posee dos Opciones:
+ *              -   0: Sistema basados en permisos explicitos
+ *              -   1: Sistema basado en roles
+ */
+define('PERMISSION_TYPE',1);
+/*
+ * Define el nombre por defecto de la aplicacion
+ */
+define('APP_NAME_TITLE','Prize');
+/*
+ * Define el separador del nombre de la aplicacion
+ */
+define('APP_NAME_TITLE_SEPARATOR','|');
 
