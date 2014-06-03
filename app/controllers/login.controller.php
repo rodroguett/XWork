@@ -36,6 +36,7 @@ class loginController extends Ctrl {
                     $this->_view->load('index',false);        
                     //$this->_view->assign('VAR','Cancino estas puro odiando!');
                     $this->_view->assign('HOLA','Bienvenido login');
+                    
                     $this->_view->renderizar();                    
           }
           
