@@ -33,7 +33,9 @@ class loginController extends Ctrl {
           }
           
           public function index() {
-                    $this->_view->load('index',false);                    
+                    $this->_view->load('index',false);        
+                    //$this->_view->assign('VAR','Cancino estas puro odiando!');
+                    $this->_view->assign('HOLA','Bienvenido login');
                     $this->_view->renderizar();                    
           }
           
@@ -43,18 +45,18 @@ class loginController extends Ctrl {
                     $pass = $p['password'];
                     $r = $this->_userModel->getLogin($mail,$pass);
                     if($r > 0){
-                              $all = $this->_userModel->getInfoUsuario($r);
-                              $perm = $this->_userModel->getAllPermisos($r);
+//                              $all = $this->_userModel->getInfoUsuario($r);
+//                              $perm = $this->_userModel->getAllPermisos($r);
                               \XWork\Session::set('idusuario', $r);
-                              \XWork\Session::set('user_permisos', $perm);
-                              \XWork\Session::set('mail', $all->mail);
-                              \XWork\Session::set('nombre', $all->nombre);
-                              \XWork\Session::set('apellido', $all->apellido);
-                              \XWork\Session::set('fcreacion', $all->fcreacion);
-                              \XWork\Session::set('telefono', $all->telefono);
-                              \XWork\Session::set('perfil', $all->perfil);
-                              \XWork\Session::set('cargo', $all->cargo);
-                              \XWork\Session::set('fmodificacion', $all->fmodificacion);
+//                              \XWork\Session::set('user_permisos', $perm);
+//                              \XWork\Session::set('mail', $all->mail);
+                              \XWork\Session::set('nombre', 'Pepito');
+                              \XWork\Session::set('apellido', 'Ramos');
+//                              \XWork\Session::set('fcreacion', $all->fcreacion);
+//                              \XWork\Session::set('telefono', $all->telefono);
+                              \XWork\Session::set('perfil', 'administrador');
+//                              \XWork\Session::set('cargo', $all->cargo);
+//                              \XWork\Session::set('fmodificacion', $all->fmodificacion);
                               echo \XWork\Session::set('onlogin', 1);
                     } else {
                               echo "Usuario no Válido";

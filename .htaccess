@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?request=$1  [QSA,L]
+
+errorDocument 404 /errors.php?code=404
+</IfModule>
+
+php_value post_max_size 120M
+php_value upload_max_filesize 520M
+php_value memory_limit 120M

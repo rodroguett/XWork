@@ -103,12 +103,12 @@ define('DEFAULT_MODULE_HANDLER', '__handler.php');
 /**
  * Define cual es la direccion donde se ejecutara el framework
  */
-define('BASE_URL', 'http://dev.prize.cod/');
+define('BASE_URL', 'http://dev.xWork.cod/');
 /**
  * Define cual es la direccion donde se encuentra el proyecto; si el framework esta
  * en el 'root' entonces se deja igual que BASE_URL
  */
-define('BASE_URL_PROYECT', 'http://dev.prize.cod/login/');
+define('BASE_URL_PROYECT', 'http://dev.xWork.cod/login/');
 /*
  * Define El tiempo predeterminado de Session en minutos
  */

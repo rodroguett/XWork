@@ -59,11 +59,14 @@
 
                                         <div class="row">
                                                   <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-                                                            <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+                                                            <h1 class="txt-color-red login-header-big">[:TESTING:]</h1>
+                                                           
                                                             <div class="hero">
 
                                                                       <div class="pull-left login-desc-box-l">
                                                                                 <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
+                                                                      
+                                                                                <h1 class="txt-color-red">[:HOLA:]</h1>
                                                                       </div>
 
                                                                       <img src="[:__TPL_IMG:]demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
@@ -126,6 +129,25 @@
                               </div>
 
                     </div>
+                    
+                    
+<div id="HandlerBlackOut">
+          <div class="overlay_black">
+                    <div class="container_overlay">
+                              <div class="image_overlay  bounceInDown animated"> 
+                                        <div class="bubblingG">
+                                                  <span id="bubblingG_1">
+                                                  </span>
+                                                  <span id="bubblingG_2">
+                                                  </span>
+                                                  <span id="bubblingG_3">
+                                                  </span>
+                                        </div>
+                              </div>
+                              <div class="text_overlay">Espere...</div>
+                    </div>
+          </div>
+</div>
 
                     <!--================================================== -->	
 
@@ -228,7 +250,9 @@
                                                                       if (msg == 1) {
                                                                                 $('body').fadeOut(1000, newpage);
                                                                       } else {
-                                                                                $(".control-label[for=signin]").html('<center>'+msg+'</center>')
+                                                                          alert(msg);
+                                                                          $.blackout.hide();
+                                                                                //$(".control-label[for=signin]").html('<center>'+msg+'</center>')
                                                                       }
                                                             });
                                                   }

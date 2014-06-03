@@ -14,18 +14,17 @@ if (!defined('XWORK'))
 
 /**
  *        Define el nombre del esquema de la Base de Datos
- */
-define('DB_NAME', 'db_export');
+ */define('DB_NAME', 'DEMO');
 
 /**
  *        Define el nombre del usuario de la Base de Datos
  */
-define('DB_USER', 'root');
+define('DB_USER', 'test');
 
 /**
  *        Define la Contraseña del usuario de la Base de Datos
  */
-define('DB_PASS', 'root');
+define('DB_PASS', 'test');
 
 /**
  *        Define el Host donde se encuentra la Base de Datos

@@ -30,9 +30,11 @@ class indexController extends Ctrl {
                     $this->_view->assign('CANTIDAD_MENSAJES_USUARIO','');
                     $this->_view->assign('CANTIDAD_NOTIFICACIONES_USUARIO','');
                     $this->_view->assign('CANTIDAD_TAREAS_USUARIO','2');
+                    
 //                    $this->_view->assign('TEST','Prueba terminada');
 //                    $this->_view->assign('CANCINO','Daniel');
 //                    $this->_view->setScript(array('example'));
+                    
                     $this->_view->renderizar();
                     
           }

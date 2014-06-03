@@ -18,13 +18,17 @@ class routinesModel extends Mdl {
                     $mail = $this->_database->_sanitize($mail);
                     $pass = md5($this->_database->_sanitize($pass));
                     
-                    $this->_database->_query('SET @idusuario = 0;');
-                    $this->_database->_query("CALL getLogin('" . $mail . "','" . $pass . "',@idusuario);");
-                    $this->_database->_query('SELECT @idusuario as idusuario;');
-                    $a = $this->_database->_fetchObject();
-                    $r = $a[0]->idusuario;
-                    $this->_database->_moreResults();
-                    return $r;
+                    $this->_database->_query('SET @idusuario = -1;');
+                    $this->_database->_query("CALL login('" . $mail . "','" . $pass . "',@idusuario);");
+                    $l = $this->_database->_query('SELECT @idusuario as idusuario;');
+                    $k = $l->fetch_object();
+                    return $k->idusuario;
+                    //$b = $this->_database->_fetchObject();
+                    
+//                    $a = $this->_database->_fetchObject();
+//                    $r = $a[0]->idusuario;
+//                    $this->_database->_moreResults();
+                    //return $r;
                     
           }
           
@@ -36,7 +40,7 @@ class routinesModel extends Mdl {
           }
           
           public function getAllMenu() {
-                    $this->_database->_callRoutine("getAllMenu",array());
+                    $this->_database->_callRoutine("ifkeirl_mc.getAllMenu",array());
                     return $this->_database->_fetchObject();
           }
           
