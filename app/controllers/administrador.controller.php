@@ -15,8 +15,11 @@ namespace XWork\Controllers;
  */
 class administradorController extends \XWork\Controller{
     
+    private $userDatos;
+    
     public function __construct() {
-        parent::__construct();
+            parent::__construct();                    
+            $this->userDatos = $this->loadModel('admin');
     }
     
     public function index() {
@@ -28,7 +31,8 @@ class administradorController extends \XWork\Controller{
 
     public function usuarios() {
         $this->_view->load('usuarios', false);
-        echo 'Cancino la chupa';
+        $this->_view->hola = $this->userDate->getUsuario();
         $this->_view->renderizar();
     }
+    
 }
