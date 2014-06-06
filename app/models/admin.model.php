@@ -42,6 +42,7 @@ use XWork\Model as adm;
            
           $fila = $result->fetch_object();
           $var.="<tr>";
+          $var.="<td>".$fila->idUsuario."</td>";
           $var.="<td>".$fila->mailUsuario."</td>";
           $var.="<td>".$fila->passUsuario."</td>";
           $var.="</tr>";

@@ -134,17 +134,21 @@
 					<div class="widget-body">					
 				             <div class="table-responsive">
 						
-					        <table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Nombre</th>
-										<th>Password</th>										
-									</tr>
-								</thead>
-								<tbody>
-							           [:user:]								
-								</tbody>
+					        <table class="table table-bordered" WIDTH=300>
+							
+							<tr>
+							   <td>ID</td>
+							   <td>Email</td>
+							   <td>Password</td>                                                            
+						        </tr>
+                                            <!--        <tr>
+                                                       <td>[:user:]</td>
+						       <td>[:user:]</td>
+                                                       <td>[:user:]</td>                                                       
+                                                    </tr>                               
+								-->
+                                                           [:user:]     
+														
 					          </table>						
 						</div>
 					</div>

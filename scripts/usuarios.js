@@ -28,7 +28,7 @@
             
         }).done(function(ev){
              $('#AllActividadesFromProyect').html(ev);
-             alert(ev);
+//             alert(ev);
         }); 
          
      } 
