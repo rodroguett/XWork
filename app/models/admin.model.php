@@ -50,7 +50,21 @@ use XWork\Model as adm;
        
        return $var;
        
-   } 
+   }
+   
+   public function saveUser($mail, $pass){
+       //Insertar_usuarios_clinica
+       $this->_database->_query("SET @iMail = '" . $this->_database->_sanitize($mail) . "';");
+       $this->_database->_query("SET @iPass = '" . md5($pass) . "';");
+       $this->_database->_query("SET @oId = '';");
+       $this->_database->_query("CALL Insertar_usuarios_clinica(@iMail,@iPass,@oId);");
+       $o = $this->_database->_query("SELECT @oId AS lastid");
+       $n = $o->fetch_object();
+       $id = $n->lastid;
+       return $id;
+       
+       
+   }
      
  }
  

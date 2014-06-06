@@ -12,28 +12,29 @@
      var email = $("[name=txtemail]").val();
      var pass  = $("[name=txtpass]").val();
      
-     console.log(pass);
+//     console.log(pass);
      
      if(email == ""){       
-      $("[name=txtemail]").focus().after('<p>Ingrese usuario</p>')  
+      $("[name=txtemail]").focus();
       return  false; 
      }else if(pass = ""){          
-       $("[name=txtpass]").focus().after('<p>Ingrese Clave</p>') 
+       $("[name=txtpass]").focus(); 
        return false;
      }else{        
         $.ajax({             
           type: "POST",
-          url:"[:__BASE_URL:]administrador/saveUsuarios",
+          url:"[:__BASE_URL:]administrador/EnviarUsuarios",
           data:data 
             
         }).done(function(ev){
-            console.log(ev);           
+             $('#AllActividadesFromProyect').html(ev);
+             alert(ev);
         }); 
          
      } 
          
      
-     console.log(email);
+//     console.log(email);
      
      
  });
