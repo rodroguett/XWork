@@ -23,16 +23,23 @@ class administradorController extends \XWork\Controller{
     }
     
     public function index() {
-        $this->_view->load('index', false);
-        echo 'index';
+        $this->_view->load('index', false);       
         $this->_view->renderizar();
 
     }
 
     public function usuarios() {
         $this->_view->load('usuarios', false);
-        $this->_view->hola = $this->userDate->getUsuario();
+        $this->_view->assign('user',$this->userDatos->getUsuario());
+        $this->_view->assign('EXPLICIT_SCRIPT',$this->_view->loadJavascriptScript('usuarios'));
         $this->_view->renderizar();
     }
+    
+   public function saveUsuarios(){
+       
+      $this->_view->load('usuarios',false);
+      $this->_view->assign
+       
+   }
     
 }
